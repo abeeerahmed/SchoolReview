@@ -25,6 +25,10 @@ app.include_router(stats.router, prefix="/api/stats", tags=["stats"])
 app.include_router(auth.router, prefix="/api/auth", tags=["auth"])
 app.include_router(reviews.router, prefix="/api/reviews", tags=["reviews"])
 
+@app.get("/health")
+def health():
+    return {"status": "ok", "service": "schoolreview"}
+
 # Serve frontend static files
 static_dir = os.path.join(os.path.dirname(__file__), "static")
 if os.path.isdir(static_dir):
@@ -38,8 +42,3 @@ if os.path.isdir(static_dir):
         if os.path.isfile(file_path):
             return FileResponse(file_path)
         return FileResponse(os.path.join(static_dir, "index.html"))
-
-@app.get("/health")
-def health():
-    return {"status": "ok", "service": "schoolreview"}
-EOF
