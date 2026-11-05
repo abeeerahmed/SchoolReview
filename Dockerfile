@@ -7,6 +7,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY backend/ .
 
+# v2 - force rebuild
 RUN python download_db.py
 
 ENV DB_PATH=/app/schoolreview.db
