@@ -55,6 +55,8 @@ def list_institutes(
     page_size: int = Query(20, ge=1, le=100),
 ):
     conn = get_conn()
+    if conn is None:
+        return {"total": 0, "page": page, "page_size": page_size, "data": [], "error": "Database not configured. Set DB_DOWNLOAD_URL in Render env vars."}
     cur = conn.cursor()
     where = []
     params = []

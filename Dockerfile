@@ -12,6 +12,9 @@ ARG DB_DOWNLOAD_URL=""
 RUN if [ -n "$DB_DOWNLOAD_URL" ]; then \
         echo "Downloading database from $DB_DOWNLOAD_URL..."; \
         python -c "import urllib.request; urllib.request.urlretrieve('$DB_DOWNLOAD_URL', '/app/schoolreview.db')"; \
+        echo "Database downloaded successfully"; \
+    else \
+        echo "No DB_DOWNLOAD_URL provided. Backend will start with empty database."; \
     fi
 
 ENV DB_PATH=/app/schoolreview.db
