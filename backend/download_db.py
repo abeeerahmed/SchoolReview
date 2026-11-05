@@ -1,38 +1,11 @@
-import os, sys
+import urllib.request, gzip, os, shutil
 
-url = os.environ.get("DB_DOWNLOAD_URL", "")
-if not url:
-    print("No DB_DOWNLOAD_URL provided. Backend will start with empty database.")
-    sys.exit(0)
-
-print(f"Downloading database from {url}...")
-
-# Try gdown first (handles Google Drive large files)
-try:
-    import gdown
-    # Extract file ID
-    import re
-    file_id = None
-    m = re.search(r'/d/([a-zA-Z0-9_-]+)', url)
-    if m:
-        file_id = m.group(1)
-    m = re.search(r'id=([a-zA-Z0-9_-]+)', url)
-    if m:
-        file_id = m.group(1)
-    if file_id:
-        gdown.download(f"https://drive.google.com/uc?id={file_id}", '/app/schoolreview.db', quiet=False)
-        print('Database size:', os.path.getsize('/app/schoolreview.db') / 1024 / 1024, 'MB')
-        sys.exit(0)
-except ImportError:
-    pass
-except Exception as e:
-    print('gdown failed:', e)
-
-# Fallback: try direct download
-import urllib.request
-try:
-    urllib.request.urlretrieve(url, '/app/schoolreview.db')
-    print('Database size:', os.path.getsize('/app/schoolreview.db') / 1024 / 1024, 'MB')
-except Exception as e:
-    print('Download failed:', e)
-    sys.exit(1)
+url = 'https://github.com/abeeerahmed/SchoolReview/releases/download/v1.0/bd_education.db.gz'
+print('Downloading compressed database...')
+urllib.request.urlretrieve(url, '/tmp/bd_education.db.gz')
+print('Downloaded. Decompressing...')
+with gzip.open('/tmp/bd_education.db.gz', 'rb') as f_in:
+    with open('/app/schoolreview.db', 'wb') as f_out:
+        shutil.copyfileobj(f_in, f_out)
+os.remove('/tmp/bd_education.db.gz')
+print('Database ready:', os.path.getsize('/app/schoolreview.db') / 1024 / 1024, 'MB')
