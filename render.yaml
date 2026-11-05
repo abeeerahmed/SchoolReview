@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: schoolreview-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    envVars:
+      - key: DB_PATH
+        value: /app/schoolreview.db
+    healthCheckPath: /health
+    plan: free
