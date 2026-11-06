@@ -3,13 +3,13 @@ import { lazy, Suspense, useState, useEffect } from 'react';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { NetworkBanner } from './components/NetworkBanner';
 import { Star, Menu, X, Moon, Sun } from 'lucide-react';
-import { Rankings } from './pages/Rankings';
 
 const Home = lazy(() => import('./pages/Home').then((m) => ({ default: m.Home })));
 const Institutes = lazy(() => import('./pages/Institutes').then((m) => ({ default: m.Institutes })));
 const InstituteDetail = lazy(() => import('./pages/InstituteDetail').then((m) => ({ default: m.InstituteDetail })));
 const Login = lazy(() => import('./pages/Login').then((m) => ({ default: m.Login })));
 const AuthCallback = lazy(() => import('./pages/AuthCallback').then((m) => ({ default: m.AuthCallback })));
+const Rankings = lazy(() => import('./pages/Rankings').then((m) => ({ default: m.Rankings })));
 const Map = lazy(() => import('./pages/Map').then((m) => ({ default: m.Map })));
 
 function Navbar() {
