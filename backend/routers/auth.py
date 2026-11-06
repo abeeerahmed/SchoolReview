@@ -12,13 +12,13 @@ JWT_EXPIRY_HOURS = 72
 
 GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", "")
 GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", "")
-GOOGLE_REDIRECT_URI = os.environ.get("GOOGLE_REDIRECT_URI", "http://localhost:8000/api/auth/google/callback")
+GOOGLE_REDIRECT_URI = os.environ.get("GOOGLE_REDIRECT_URI", "https://schoolreview-api.onrender.com/api/auth/google/callback")
 
 FACEBOOK_APP_ID = os.environ.get("FACEBOOK_APP_ID", "")
 FACEBOOK_APP_SECRET = os.environ.get("FACEBOOK_APP_SECRET", "")
-FACEBOOK_REDIRECT_URI = os.environ.get("FACEBOOK_REDIRECT_URI", "http://localhost:8000/api/auth/facebook/callback")
+FACEBOOK_REDIRECT_URI = os.environ.get("FACEBOOK_REDIRECT_URI", "https://schoolreview-api.onrender.com/api/auth/facebook/callback")
 
-FRONTEND_URL = os.environ.get("FRONTEND_URL", "http://localhost:5173")
+FRONTEND_URL = os.environ.get("FRONTEND_URL", "https://schoolreview-api.onrender.com")
 
 def create_jwt(user_id: int, email: str, name: str, avatar: str = None) -> str:
     payload = {
