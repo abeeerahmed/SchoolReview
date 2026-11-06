@@ -9,7 +9,7 @@ const Institutes = lazy(() => import('./pages/Institutes').then((m) => ({ defaul
 const InstituteDetail = lazy(() => import('./pages/InstituteDetail').then((m) => ({ default: m.InstituteDetail })));
 const Login = lazy(() => import('./pages/Login').then((m) => ({ default: m.Login })));
 const AuthCallback = lazy(() => import('./pages/AuthCallback').then((m) => ({ default: m.AuthCallback })));
-const Rankings = lazy(() => import('./pages/Rankings').then((m) => ({ default: m.Rankings })));
+import { Rankings } from './pages/Rankings';
 const Map = lazy(() => import('./pages/Map').then((m) => ({ default: m.Map })));
 
 function Navbar() {
