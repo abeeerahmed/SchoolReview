@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom';
-import React, { lazy, Suspense, useState, useEffect } from 'react';
+import { lazy, Suspense, useState, useEffect } from 'react';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { NetworkBanner } from './components/NetworkBanner';
 import { Star, Menu, X, Moon, Sun } from 'lucide-react';
@@ -87,12 +87,6 @@ function Loading() {
   return <div className="flex items-center justify-center py-20"><div className="w-8 h-8 border-2 border-emerald-700 border-t-transparent rounded-full animate-spin" /></div>;
 }
 
-class ErrorBoundary extends React.Component<{children: React.ReactNode}, {hasError: boolean, error: any}> {
-  constructor(props: any) { super(props); this.state = { hasError: false, error: null }; }
-  static getDerivedStateFromError(error: any) { return { hasError: true, error }; }
-  render() { if (this.state.hasError) { return <div style={{color:'red',padding:20}}><h1>Error</h1><pre>{String(this.state.error)}</pre></div>; } return this.props.children; }
-}
-
 export default function App() {
   return (
     <BrowserRouter>
@@ -101,7 +95,6 @@ export default function App() {
           <NetworkBanner />
           <Navbar />
           <main className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
-            <ErrorBoundary>
             <Suspense fallback={<Loading />}>
               <Routes>
                 <Route path="/" element={<Home />} />
@@ -113,7 +106,6 @@ export default function App() {
                 <Route path="/map" element={<Map />} />
               </Routes>
             </Suspense>
-            </ErrorBoundary>
           </main>
         </div>
       </AuthProvider>
